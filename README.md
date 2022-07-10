@@ -1,4 +1,6 @@
 # wishlist
+
+### Files
 | File 	| Description|
 |---|---|
 |__init__.py| 	Enables /wishlist to be a Python package|
@@ -7,3 +9,17 @@
 |config.py |	Contains code to handle the application’s configuration file|
 |database.py| 	Contains code to handle the application’s wishlist databas|
 |wishlist.py |	Provides code to connect the CLI with the wishlist database|
+
+### Project layout
+  wishlist_project/\
+│\
+├── wishlist/\
+│   ├── __init__.py\
+│   ├── __main__.py\
+│   ├── cli.py\
+│   ├── config.py\
+│   ├── database.py\
+│   └── wishlist.py\
+│\
+├── README.md\
+└── requirements.txt\
