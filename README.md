@@ -1,4 +1,6 @@
 # wishlist
+Creating wishlist app with help of https://realpython.com/python-typer-cli/
+
 
 ### Files
 | File 	| Description|
