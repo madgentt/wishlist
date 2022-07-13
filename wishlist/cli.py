@@ -4,6 +4,7 @@
 from pathlib import Path
 from typing import Optional
 import typer
+import os
 from wishlist import ERRORS, __app_name__, __version__, config, database
 
 app = typer.Typer()
@@ -12,10 +13,10 @@ app = typer.Typer()
 
 def init(
     db_path: str = typer.Option(
-        str(database.DEFAULT_DB_FILE_PATH),
+        str(database.DEFAULT_DB_FILE_PATH) + "/." + Path.home().stem + "_wishs.json",
         "--db-path",
         "-db",
-        prompt="wishes database location?",
+        prompt="Wishes database location?",
     ),
 ) -> None:
     """Initialize the wishes database."""
