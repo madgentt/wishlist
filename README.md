@@ -1,4 +1,6 @@
 # wishlist
+Creating wishlist app with help of https://realpython.com/python-typer-cli/
+
 
 ### Files
 | File 	| Description|
@@ -9,6 +11,7 @@
 |config.py |	Contains code to handle the application’s configuration file|
 |database.py| 	Contains code to handle the application’s wishlist databas|
 |wishlist.py |	Provides code to connect the CLI with the wishlist database|
+|requirements.txt| Provide the list of dependencies |
 
 ### Project layout
   wishlist_project/\
