@@ -13,7 +13,7 @@ app = typer.Typer()
 
 def init(
     db_path: str = typer.Option(
-        str(database.DEFAULT_DB_FILE_PATH) + "/." + Path.home().stem + "_wishs.json",
+        str(database.DEFAULT_DB_FILE_PATH) + "/." + Path.home().stem + "_wishes.json",
         "--db-path",
         "-db",
         prompt="Wishes database location?",
