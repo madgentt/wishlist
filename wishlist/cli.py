@@ -2,14 +2,36 @@
 # wishlist/cli.py
 
 from pathlib import Path
-from typing import Optional
 import typer
 import os
-from wishlist import ERRORS, __app_name__, __version__, config, database
+from typing import List, Optional
+from wishlist import (ERRORS, __app_name__,
+                      __version__, config, database, wishlist)
 
 app = typer.Typer()
 
+
 @app.command()
+def add(
+    description: List[str] = typer.Argument(...),
+    link: str = typer.Option("--link", "-l"),
+    price: int = typer.Option(2, "--price", "-p", min=1, max=3)
+) -> None:
+    """Add a new wish with a DESCRIPTION."""
+    wishlister = get_wishlister()
+    wish, error = wishlister.add(description, link, price)
+    if error:
+        typer.secho(
+            f'Adding wish failed with "{ERRORS[error]}"', fg=typer.colors.RED
+        )
+        raise typer.Exit(1)
+    else:
+        typer.secho(
+            f"""wish: "{wish['Description']}" was added """
+            f"""with priority: {price}""",
+            fg=typer.colors.GREEN,
+        )
+
 
 def init(
     db_path: str = typer.Option(
@@ -36,6 +58,26 @@ def init(
         raise typer.Exit(1)
     else:
         typer.secho(f"The wishes database is {db_path}", fg=typer.colors.GREEN)
+
+
+def get_wishlister() -> wishlist.Wishlister:
+    if config.CONFIG_FILE_PATH.exists():
+        db_path = database.get_database_path(config.CONFIG_FILE_PATH)
+    else:
+        typer.secho(
+            'Config file not found. Please, run "wishlist init"',
+            fg=typer.colors.RED,
+        )
+        raise typer.Exit(1)
+    if db_path.exists():
+        return wishlist.Wishlister(db_path)
+    else:
+        typer.secho(
+            'Database not found. Please, run "wishlist init"',
+            fg=typer.colors.RED,
+        )
+        raise typer.Exit(1)
+
 
 def _version_callback(value: bool) -> None:
     if value:

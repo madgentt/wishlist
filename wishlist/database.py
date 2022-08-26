@@ -14,7 +14,7 @@ DEFAULT_DB_FILE_PATH = Path.home().joinpath(
 
 
 class DBResponse(NamedTuple):
-    todo_list: List[Dict[str, Any]]
+    wish_list: List[Dict[str, Any]]
     error: int
 
 
@@ -32,7 +32,7 @@ class DatabaseHandler:
         except OSError:  # Catch file IO problems
             return DBResponse([], DB_READ_ERROR)
 
-    def write_todos(self, wish_list: List[Dict[str, Any]]) -> DBResponse:
+    def write_wishes(self, wish_list: List[Dict[str, Any]]) -> DBResponse:
         try:
             with self._db_path.open("w") as db:
                 json.dump(wish_list, db, indent=4)
